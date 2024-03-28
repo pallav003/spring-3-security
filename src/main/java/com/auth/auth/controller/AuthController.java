@@ -6,6 +6,7 @@ import com.auth.auth.dto.request.User;
 import com.auth.auth.dto.response.ErrorRes;
 import com.auth.auth.dto.response.LoginRes;
 import com.auth.auth.jwt.JwtUtil;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,17 +18,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/rest/auth")
+@RequestMapping("/auth")
+@RequiredArgsConstructor
 public class AuthController {
     private final AuthenticationManager authenticationManager;
-
-
-    private JwtUtil jwtUtil;
-    public AuthController(AuthenticationManager authenticationManager, JwtUtil jwtUtil) {
-        this.authenticationManager = authenticationManager;
-        this.jwtUtil = jwtUtil;
-
-    }
+    private final JwtUtil jwtUtil;
 
     @ResponseBody
     @RequestMapping(value = "/login",method = RequestMethod.POST)

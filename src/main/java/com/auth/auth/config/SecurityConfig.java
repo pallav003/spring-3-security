@@ -1,6 +1,7 @@
 package com.auth.auth.config;
 
 import com.auth.auth.service.CustomUserDetailsService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,19 +18,13 @@ import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
     private final CustomUserDetailsService userDetailsService;
     private final JwtAuthFilter jwtAuthFilter;
     private static final String[] AUTH_WHITELIST = {
-            "rest/auth/login"
+            "auth/login"
     };
-
-
-    public SecurityConfig(CustomUserDetailsService customUserDetailsService, JwtAuthFilter jwtAuthFilter ) {
-        this.userDetailsService = customUserDetailsService;
-        this.jwtAuthFilter = jwtAuthFilter;
-
-    }
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http, NoOpPasswordEncoder noOpPasswordEncoder)
             throws Exception {
